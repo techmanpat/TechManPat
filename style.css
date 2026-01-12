@@ -1,226 +1,102 @@
-:root {
-  color-scheme: dark;
-  --bg: #0b0f14;
-  --card: #111826;
-  --text: #e7edf6;
-  --muted: #b5c0d3;
-  --border: rgba(255, 255, 255, 0.08);
-  --accent: #7dd3fc;
-}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TechManPat</title>
+    <meta name="description" content="TechManPat, Australian tech reviews and straight talking explainers." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-* { box-sizing: border-box; }
+  <body>
+    <main class="container">
+      <header class="topbar">
+        <a class="brand" href="index.html">
+          <img class="logo" src="assets/logo.png" alt="TechManPat logo" />
+          <span>TechManPat</span>
+        </a>
 
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  background: radial-gradient(1200px 700px at 20% 10%, rgba(125, 211, 252, 0.12), transparent 55%),
-              radial-gradient(900px 600px at 90% 30%, rgba(167, 139, 250, 0.10), transparent 55%),
-              var(--bg);
-  color: var(--text);
-}
+        <nav class="nav">
+          <a class="navLink active" href="index.html">Home</a>
+          <a class="navLink" href="services.html">Services</a>
+          <a class="navLink" href="policy.html">Review & Disclosure Policy</a>
+        </nav>
+      </header>
 
-.container {
-  max-width: 980px;
-  padding: 28px 18px;
-  margin: 0 auto;
-}
+      <section class="hero">
+        <div class="heroTop">
+          <img class="heroLogo" src="assets/logo.png" alt="TechManPat logo" />
+          <div class="badge"><span class="badgeDot"></span><span>TechManPat</span></div>
+        </div>
 
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0 22px;
-}
+        <h1>Tech reviews, sponsored editorials, and straight talking explainers.</h1>
+        <p class="sub">
+          Based in Australia. Real-world testing across home tech, smart home, networking, power, and gadgets.
+        </p>
 
-.brand {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 800;
-  letter-spacing: 0.2px;
-}
+        <div class="actions">
+          <a class="button primary" href="https://www.youtube.com/techmanpat" target="_blank" rel="noreferrer">YouTube</a>
+          <a class="button" href="mailto:patryk@techmanpat.com">Contact</a>
+          <a class="button" href="services.html">Services</a>
+        </div>
+      </section>
 
-.nav {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
+      <section class="card">
+        <h2>Quick links</h2>
+        <div class="grid">
+          <a class="tile" href="https://www.youtube.com/techmanpat" target="_blank" rel="noreferrer">
+            <div class="tileTitle">YouTube</div>
+            <div class="tileSub">Long-form videos, reviews, Dirt Report</div>
+          </a>
 
-.navLink {
-  color: var(--muted);
-  text-decoration: none;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.03);
-  padding: 8px 10px;
-  border-radius: 12px;
-  font-size: 14px;
-}
+          <a class="tile" href="https://www.instagram.com/techmanpat" target="_blank" rel="noreferrer">
+            <div class="tileTitle">Instagram</div>
+            <div class="tileSub">Behind the scenes, short clips</div>
+          </a>
 
-.navLink.active {
-  color: var(--text);
-  border-color: rgba(125, 211, 252, 0.35);
-  background: rgba(125, 211, 252, 0.12);
-}
+          <a class="tile" href="https://x.com/techmanpat" target="_blank" rel="noreferrer">
+            <div class="tileTitle">X</div>
+            <div class="tileSub">Quick takes, updates, links</div>
+          </a>
 
-.header {
-  padding: 6px 0 10px;
-}
+          <a class="tile" href="https://www.facebook.com/techmanpat" target="_blank" rel="noreferrer">
+            <div class="tileTitle">Facebook</div>
+            <div class="tileSub">Posts, community, shares</div>
+          </a>
 
-.badge {
-  display: inline-block;
-  font-weight: 700;
-  letter-spacing: 0.4px;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
-  margin-bottom: 16px;
-}
+          <a class="tile" href="services.html">
+            <div class="tileTitle">Services</div>
+            <div class="tileSub">Reviews, sponsored content, events, interviews</div>
+          </a>
 
-h1 {
-  margin: 0 0 10px 0;
-  font-size: 38px;
-  line-height: 1.15;
-}
+          <a class="tile" href="policy.html">
+            <div class="tileTitle">Review & Disclosure Policy</div>
+            <div class="tileSub">How reviews, editorials, and affiliate links work</div>
+          </a>
+        </div>
+      </section>
 
-h2 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-}
+      <section class="card">
+        <h2>Business enquiries</h2>
+        <p class="sub">
+          For collaborations, send a short brief, timeline, and what success looks like.
+        </p>
 
-h3 {
-  margin: 18px 0 8px 0;
-  font-size: 16px;
-}
+        <div class="info">
+          <div class="infoRow">
+            <div class="label">Email</div>
+            <div class="value"><a href="mailto:patryk@techmanpat.com">patryk@techmanpat.com</a></div>
+          </div>
+        </div>
+      </section>
 
-h4 {
-  margin: 14px 0 6px 0;
-  font-size: 15px;
-}
+      <footer class="footer">
+        <p>© <span id="year"></span> TechManPat</p>
+      </footer>
+    </main>
 
-.sub {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.55;
-  font-size: 16px;
-}
-
-.actions {
-  margin-top: 16px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.button {
-  display: inline-block;
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  color: var(--text);
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.button.primary {
-  border-color: rgba(125, 211, 252, 0.35);
-  background: rgba(125, 211, 252, 0.12);
-}
-
-.card {
-  margin-top: 16px;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: rgba(17, 24, 38, 0.7);
-  backdrop-filter: blur(8px);
-}
-
-.grid {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.tile {
-  padding: 14px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
-  text-decoration: none;
-  color: var(--text);
-}
-
-.tile:hover {
-  border-color: rgba(125, 211, 252, 0.28);
-}
-
-.tileTitle {
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.tileSub {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.info {
-  margin-top: 10px;
-  display: grid;
-  gap: 10px;
-}
-
-.infoRow {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 10px;
-  align-items: center;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.label {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.value a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.value a:hover {
-  text-decoration: underline;
-}
-
-.prose p {
-  color: var(--muted);
-  line-height: 1.7;
-  margin: 10px 0;
-}
-
-.prose ul {
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.footer {
-  margin-top: 20px;
-  padding: 14px 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-@media (max-width: 820px) {
-  h1 { font-size: 30px; }
-  .grid { grid-template-columns: 1fr; }
-  .infoRow { grid-template-columns: 1fr; }
-  .topbar { flex-direction: column; align-items: flex-start; }
-  .nav { justify-content: flex-start; }
-}
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
