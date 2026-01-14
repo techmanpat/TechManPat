@@ -5,85 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TechManPat</title>
     <meta name="description" content="TechManPat, Australian Tech Reviews & Dirt Report." />
+
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="Assets/logo.png" />
   </head>
 
   <body>
+    <div class="bg">
+      <div class="bgGlow"></div>
+      <div class="bgGrid"></div>
+      <div class="bgGrain"></div>
+    </div>
+
     <main class="container">
-      <!-- Top navigation -->
       <header class="topbar">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="TechManPat home">
           <img class="logo" src="Assets/logo.png" alt="TechManPat logo" />
-          <span>TechManPat</span>
+          <span class="brandText">TechManPat</span>
         </a>
 
-        <nav class="nav">
+        <nav class="nav" aria-label="Primary">
           <a class="navLink active" href="index.html">Home</a>
           <a class="navLink" href="services.html">Services</a>
           <a class="navLink" href="policy.html">Review & Disclosure Policy</a>
         </nav>
       </header>
 
-      <!-- Hero -->
-      <header class="hero">
-        <div class="heroTop">
-          <img class="heroLogo" src="Assets/logo.png" alt="TechManPat logo" />
-          <div class="badge">TechManPat</div>
+      <section class="hero">
+        <div class="heroInner">
+          <div class="badge">
+            <span class="badgeDot"></span>
+            <span>Australian creator</span>
+          </div>
+
+          <h1>Tech reviews, sponsored editorials, and straight talking explainers.</h1>
+
+          <p class="sub">
+            Real world testing across home tech, smart home, networking, power, and gadgets.
+          </p>
+
+          <div class="actions">
+            <a class="button primary" href="https://www.youtube.com/techmanpat" target="_blank" rel="noreferrer">YouTube</a>
+            <a class="button" href="mailto:patryk@techmanpat.com">Contact</a>
+            <a class="button ghost" href="services.html">Services</a>
+          </div>
+
+          <div class="meta">
+            <div class="metaItem">
+              <span class="metaLabel">Handles</span>
+              <span class="metaValue">@techmanpat</span>
+            </div>
+            <div class="metaItem">
+              <span class="metaLabel">Email</span>
+              <a class="metaValue" href="mailto:patryk@techmanpat.com">patryk@techmanpat.com</a>
+            </div>
+          </div>
         </div>
 
-        <h1>Tech reviews, sponsored editorials, and straight talking explainers.</h1>
-        <p class="sub">
-          Australian creator focused on real-world testing across home tech, smart home, networking, power, and gadgets.
-        </p>
-
-        <div class="actions">
-          <a class="button primary" href="https://www.youtube.com/techmanpat" target="_blank" rel="noreferrer">YouTube</a>
-          <a class="button" href="mailto:patryk@techmanpat.com">Contact</a>
+        <div class="heroMark" aria-hidden="true">
+          <img class="heroLogo" src="Assets/logo.png" alt="" />
+          <div class="heroRing"></div>
         </div>
-      </header>
+      </section>
 
-      <!-- Quick links -->
       <section class="card">
-        <h2>Quick links</h2>
+        <div class="cardHead">
+          <h2>Quick links</h2>
+          <p class="cardSub">Shortcuts to where you publish and post.</p>
+        </div>
+
         <div class="grid">
           <a class="tile" href="https://www.youtube.com/techmanpat" target="_blank" rel="noreferrer">
             <div class="tileTitle">YouTube</div>
-            <div class="tileSub">Long-form videos, reviews, Dirt Report</div>
+            <div class="tileSub">Long form videos, reviews, Dirt Report</div>
+            <div class="tileArrow">↗</div>
           </a>
 
           <a class="tile" href="https://www.instagram.com/techmanpat" target="_blank" rel="noreferrer">
             <div class="tileTitle">Instagram</div>
             <div class="tileSub">Behind the scenes, short clips</div>
+            <div class="tileArrow">↗</div>
           </a>
 
           <a class="tile" href="https://x.com/techmanpat" target="_blank" rel="noreferrer">
             <div class="tileTitle">X</div>
             <div class="tileSub">Quick takes, updates, links</div>
+            <div class="tileArrow">↗</div>
           </a>
 
           <a class="tile" href="https://www.facebook.com/techmanpat" target="_blank" rel="noreferrer">
             <div class="tileTitle">Facebook</div>
             <div class="tileSub">Posts, community, shares</div>
+            <div class="tileArrow">↗</div>
           </a>
 
           <a class="tile" href="services.html">
             <div class="tileTitle">Services</div>
             <div class="tileSub">Reviews, sponsored content, events and more</div>
+            <div class="tileArrow">→</div>
           </a>
 
           <a class="tile" href="policy.html">
             <div class="tileTitle">Review & Disclosure Policy</div>
             <div class="tileSub">How reviews, editorials, and affiliate links work</div>
+            <div class="tileArrow">→</div>
           </a>
         </div>
       </section>
 
-      <!-- Business -->
       <section class="card">
-        <h2>Business enquiries</h2>
-        <p class="sub">
-          For reviews, sponsored editorials, unboxings, events, interviews, or brand partnerships, email us with a short brief and timeline.
-        </p>
+        <div class="cardHead">
+          <h2>Business enquiries</h2>
+          <p class="cardSub">Send a short brief, timeline, and what success looks like.</p>
+        </div>
 
         <div class="info">
           <div class="infoRow">
