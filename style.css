@@ -1,102 +1,290 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TechManPat</title>
-    <meta name="description" content="TechManPat, Australian tech reviews and straight talking explainers." />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+:root {
+  color-scheme: dark;
+  --bg0: #070a10;
+  --bg1: #0b0f14;
+  --card: rgba(255, 255, 255, 0.045);
+  --card2: rgba(255, 255, 255, 0.03);
+  --text: #e7edf6;
+  --muted: #b5c0d3;
+  --border: rgba(255, 255, 255, 0.10);
+  --accent: #7dd3fc;
+  --accent2: #a78bfa;
+  --accent3: #34d399;
+  --shadow: 0 16px 50px rgba(0, 0, 0, 0.55);
+}
 
-  <body>
-    <main class="container">
-      <header class="topbar">
-        <a class="brand" href="index.html">
-          <img class="logo" src="assets/logo.png" alt="TechManPat logo" />
-          <span>TechManPat</span>
-        </a>
+* { box-sizing: border-box; }
 
-        <nav class="nav">
-          <a class="navLink active" href="index.html">Home</a>
-          <a class="navLink" href="services.html">Services</a>
-          <a class="navLink" href="policy.html">Review & Disclosure Policy</a>
-        </nav>
-      </header>
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 700px at 15% 10%, rgba(125, 211, 252, 0.18), transparent 55%),
+    radial-gradient(900px 600px at 90% 20%, rgba(167, 139, 250, 0.16), transparent 55%),
+    radial-gradient(900px 700px at 60% 95%, rgba(52, 211, 153, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
 
-      <section class="hero">
-        <div class="heroTop">
-          <img class="heroLogo" src="assets/logo.png" alt="TechManPat logo" />
-          <div class="badge"><span class="badgeDot"></span><span>TechManPat</span></div>
-        </div>
+.container {
+  max-width: 1040px;
+  padding: 28px 18px 48px;
+  margin: 0 auto;
+}
 
-        <h1>Tech reviews, sponsored editorials, and straight talking explainers.</h1>
-        <p class="sub">
-          Based in Australia. Real-world testing across home tech, smart home, networking, power, and gadgets.
-        </p>
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  backdrop-filter: blur(14px);
+  background: linear-gradient(180deg, rgba(7,10,16,0.75), rgba(7,10,16,0.35));
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
 
-        <div class="actions">
-          <a class="button primary" href="https://www.youtube.com/techmanpat" target="_blank" rel="noreferrer">YouTube</a>
-          <a class="button" href="mailto:patryk@techmanpat.com">Contact</a>
-          <a class="button" href="services.html">Services</a>
-        </div>
-      </section>
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
 
-      <section class="card">
-        <h2>Quick links</h2>
-        <div class="grid">
-          <a class="tile" href="https://www.youtube.com/techmanpat" target="_blank" rel="noreferrer">
-            <div class="tileTitle">YouTube</div>
-            <div class="tileSub">Long-form videos, reviews, Dirt Report</div>
-          </a>
+.logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
 
-          <a class="tile" href="https://www.instagram.com/techmanpat" target="_blank" rel="noreferrer">
-            <div class="tileTitle">Instagram</div>
-            <div class="tileSub">Behind the scenes, short clips</div>
-          </a>
+.nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 
-          <a class="tile" href="https://x.com/techmanpat" target="_blank" rel="noreferrer">
-            <div class="tileTitle">X</div>
-            <div class="tileSub">Quick takes, updates, links</div>
-          </a>
+.navLink {
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  padding: 9px 12px;
+  border-radius: 14px;
+  font-size: 14px;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
 
-          <a class="tile" href="https://www.facebook.com/techmanpat" target="_blank" rel="noreferrer">
-            <div class="tileTitle">Facebook</div>
-            <div class="tileSub">Posts, community, shares</div>
-          </a>
+.navLink:hover {
+  transform: translateY(-1px);
+  border-color: rgba(125, 211, 252, 0.28);
+  background: rgba(125, 211, 252, 0.08);
+}
 
-          <a class="tile" href="services.html">
-            <div class="tileTitle">Services</div>
-            <div class="tileSub">Reviews, sponsored content, events, interviews</div>
-          </a>
+.navLink.active {
+  color: var(--text);
+  border-color: rgba(125, 211, 252, 0.38);
+  background: rgba(125, 211, 252, 0.14);
+}
 
-          <a class="tile" href="policy.html">
-            <div class="tileTitle">Review & Disclosure Policy</div>
-            <div class="tileSub">How reviews, editorials, and affiliate links work</div>
-          </a>
-        </div>
-      </section>
+.hero {
+  margin-top: 22px;
+  border-radius: 22px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background:
+    linear-gradient(135deg, rgba(125, 211, 252, 0.12), rgba(167, 139, 250, 0.10), rgba(52, 211, 153, 0.06)),
+    rgba(255,255,255,0.02);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
 
-      <section class="card">
-        <h2>Business enquiries</h2>
-        <p class="sub">
-          For collaborations, send a short brief, timeline, and what success looks like.
-        </p>
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 200px at 20% 0%, rgba(255,255,255,0.09), transparent 60%);
+  pointer-events: none;
+}
 
-        <div class="info">
-          <div class="infoRow">
-            <div class="label">Email</div>
-            <div class="value"><a href="mailto:patryk@techmanpat.com">patryk@techmanpat.com</a></div>
-          </div>
-        </div>
-      </section>
+.heroTop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
 
-      <footer class="footer">
-        <p>© <span id="year"></span> TechManPat</p>
-      </footer>
-    </main>
+.heroLogo {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+}
 
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-  </body>
-</html>
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  letter-spacing: 0.35px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.badgeDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.10);
+}
+
+h1 {
+  margin: 12px 0 10px 0;
+  font-size: 40px;
+  line-height: 1.12;
+  position: relative;
+  z-index: 1;
+}
+
+.sub {
+  margin: 0;
+  color: rgba(231, 237, 246, 0.82);
+  line-height: 1.6;
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.04);
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+}
+
+.button.primary {
+  border-color: rgba(125, 211, 252, 0.45);
+  background: linear-gradient(135deg, rgba(125, 211, 252, 0.20), rgba(167, 139, 250, 0.16));
+}
+
+.card {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+
+h2 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.tile {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(420px 160px at 20% 10%, rgba(125, 211, 252, 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 140ms ease;
+  pointer-events: none;
+}
+
+.tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, 0.30);
+}
+
+.tile:hover::after {
+  opacity: 1;
+}
+
+.tileTitle {
+  font-weight: 800;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.tileSub {
+  color: rgba(231, 237, 246, 0.78);
+  font-size: 14px;
+  line-height: 1.45;
+  position: relative;
+  z-index: 1;
+}
+
+.info {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.infoRow {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,25
