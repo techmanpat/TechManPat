@@ -4,79 +4,159 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Services, TechManPat</title>
-    <meta name="description" content="TechManPat services: reviews, sponsored content, editorials, unboxing, events, interviews." />
+    <meta
+      name="description"
+      content="TechManPat services: reviews, sponsored content and editorials, unboxing, events, interviews."
+    />
+
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="Assets/logo.png" />
   </head>
 
   <body>
+    <div class="bg">
+      <div class="bgGlow"></div>
+      <div class="bgGrid"></div>
+      <div class="bgGrain"></div>
+    </div>
+
     <main class="container">
       <header class="topbar">
-        <a class="brand" href="index.html">TechManPat</a>
-        <nav class="nav">
+        <a class="brand" href="index.html" aria-label="TechManPat home">
+          <img class="logo" src="Assets/logo.png" alt="TechManPat logo" />
+          <span class="brandText">TechManPat</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
           <a class="navLink" href="index.html">Home</a>
           <a class="navLink active" href="services.html">Services</a>
           <a class="navLink" href="policy.html">Review & Disclosure Policy</a>
         </nav>
       </header>
 
-      <header class="header">
-        <div class="badge">Services</div>
-        <h1>Work with TechManPat</h1>
-        <p class="sub">
-          Clear deliverables, clean communication, and content that feels real, because it is.
-        </p>
+      <section class="hero">
+        <div class="heroInner">
+          <div class="badge">
+            <span class="badgeDot"></span>
+            <span>Services</span>
+          </div>
 
-        <div class="actions">
-          <a class="button primary" href="mailto:patryk@techmanpat.com">Contact</a>
-          <a class="button" href="policy.html">Review & Disclosure Policy</a>
+          <h1>Work with TechManPat</h1>
+
+          <p class="sub">
+            Clear, practical content that helps viewers make decisions. Built around real-world testing, straight
+            talking explainers, and clean delivery.
+          </p>
+
+          <div class="actions">
+            <a class="button primary" href="mailto:patryk@techmanpat.com">Contact</a>
+            <a class="button" href="https://www.youtube.com/techmanpat" target="_blank" rel="noreferrer">YouTube</a>
+            <a class="button ghost" href="policy.html">Review & Disclosure Policy</a>
+          </div>
+
+          <div class="meta">
+            <div class="metaItem">
+              <span class="metaLabel">Email</span>
+              <a class="metaValue" href="mailto:patryk@techmanpat.com">patryk@techmanpat.com</a>
+            </div>
+            <div class="metaItem">
+              <span class="metaLabel">Handles</span>
+              <span class="metaValue">@techmanpat</span>
+            </div>
+          </div>
         </div>
-      </header>
 
-      <section class="card">
-        <h2>Reviews</h2>
-        <p class="sub">
-          Independent, unpaid reviews based on hands-on testing. No script approvals. No edits by brands. Viewer-first.
-        </p>
+        <div class="heroMark" aria-hidden="true">
+          <img class="heroLogo" src="Assets/logo.png" alt="" />
+          <div class="heroRing"></div>
+        </div>
       </section>
 
       <section class="card">
-        <h2>Sponsored Content & editorials</h2>
-        <p class="sub">
-          Sponsored overviews that highlight features and real-world usage. Sponsored content is clearly disclosed, and editorial control stays with TechManPat.
-        </p>
+        <div class="cardHead">
+          <h2>What we offer</h2>
+          <p class="cardSub">Pick a format, share the brief, and we’ll confirm scope and timing.</p>
+        </div>
+
+        <div class="grid">
+          <div class="tile" role="article">
+            <div class="tileTitle">Reviews</div>
+            <div class="tileSub">
+              Unpaid product reviews focused on real-world use, clarity, and what matters to buyers. Honest positives and
+              negatives, with practical testing and context.
+            </div>
+          </div>
+
+          <div class="tile" role="article">
+            <div class="tileTitle">Sponsored content and editorials</div>
+            <div class="tileSub">
+              Sponsored overviews that showcase features and use cases, while keeping editorial control with TechManPat.
+              Clear disclosure, no fluff, and straight delivery.
+            </div>
+          </div>
+
+          <div class="tile" role="article">
+            <div class="tileTitle">Unboxing</div>
+            <div class="tileSub">
+              Fast, clean first-look content. What’s in the box, build quality, setup, and the first impressions that
+              buyers actually care about.
+            </div>
+          </div>
+
+          <div class="tile" role="article">
+            <div class="tileTitle">Events</div>
+            <div class="tileSub">
+              On-site coverage for launches, demos, trade shows, and activations. Recaps, product walk-throughs, and short
+              highlight packages.
+            </div>
+          </div>
+
+          <div class="tile" role="article">
+            <div class="tileTitle">Interviews</div>
+            <div class="tileSub">
+              Founder, product, or engineering interviews. Clean framing, audience-friendly questions, and edits that keep
+              it punchy and useful.
+            </div>
+          </div>
+
+          <div class="tile" role="article">
+            <div class="tileTitle">Short-form clips</div>
+            <div class="tileSub">
+              Cut-down highlights for Instagram and Facebook. Quick hooks, clear points, and content designed to be
+              shareable.
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="card">
-        <h2>Unboxing</h2>
-        <p class="sub">
-          Fast turnaround unboxing content focused on first impressions, setup, what’s in the box, and who it’s for.
-        </p>
-      </section>
-
-      <section class="card">
-        <h2>Events</h2>
-        <p class="sub">
-          Event coverage, booth walk-throughs, product launches, and on-the-ground updates, filmed for real audiences, not internal decks.
-        </p>
-      </section>
-
-      <section class="card">
-        <h2>Interviews</h2>
-        <p class="sub">
-          Founder, engineer, and product team interviews. Straight questions, practical answers, and content that teaches the viewer something.
-        </p>
-      </section>
-
-      <section class="card">
-        <h2>Contact us</h2>
-        <p class="sub">
-          Email a short brief, timeline, and what success looks like.
-        </p>
+        <div class="cardHead">
+          <h2>How to brief us</h2>
+          <p class="cardSub">The faster this is, the faster we can lock timing and scope.</p>
+        </div>
 
         <div class="info">
           <div class="infoRow">
+            <div class="label">Send</div>
+            <div class="value">
+              A short brief, desired format, key talking points, must-have inclusions, timeline, and links to any product
+              pages or assets.
+            </div>
+          </div>
+
+          <div class="infoRow">
             <div class="label">Email</div>
-            <div class="value"><a href="mailto:patryk@techmanpat.com">patryk@techmanpat.com</a></div>
+            <div class="value">
+              <a href="mailto:patryk@techmanpat.com">patryk@techmanpat.com</a>
+            </div>
+          </div>
+
+          <div class="infoRow">
+            <div class="label">Policy</div>
+            <div class="value">
+              Please read the <a href="policy.html">Review & Disclosure Policy</a> before sending products or requesting
+              coverage.
+            </div>
           </div>
         </div>
       </section>
