@@ -8,28 +8,19 @@
   <style>
     :root {
       --bg: #0b0c10;
-      --card: #111218;
       --text: #e9e9ee;
       --muted: #a9acb8;
       --border: rgba(255,255,255,0.10);
       --border2: rgba(255,255,255,0.14);
-      --good: #41d37e;
-      --blue: #4f7cff;
       --chip: rgba(255,255,255,0.08);
       --focus: rgba(255,255,255,0.25);
+      --green: rgba(65,211,126,0.14);
+      --blue: rgba(79,124,255,0.18);
     }
 
-    /* ---------- GLOBAL FIXES ---------- */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      overflow-x: hidden;
-    }
+    /* Global layout fixes for GitHub Pages */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { width: 100%; overflow-x: hidden; }
 
     body {
       font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial;
@@ -42,11 +33,7 @@
       max-width: 1100px;
     }
 
-    h1 {
-      margin: 0 0 6px 0;
-      font-size: 22px;
-    }
-
+    h1 { margin: 0 0 6px 0; font-size: 22px; }
     .sub {
       margin: 0 0 18px 0;
       color: var(--muted);
@@ -54,35 +41,26 @@
       line-height: 1.45;
     }
 
-    /* ---------- LAYOUT ---------- */
     .grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
       gap: 14px;
       align-items: stretch;
     }
-
-    @media (max-width: 920px) {
-      .grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
 
     .row {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 10px;
     }
-
     .row3 {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
       gap: 10px;
     }
+    @media (max-width: 620px) { .row, .row3 { grid-template-columns: 1fr; } }
 
-    @media (max-width: 620px) {
-      .row, .row3 { grid-template-columns: 1fr; }
-    }
-
-    /* ---------- CARDS ---------- */
     .card {
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -93,24 +71,10 @@
       min-width: 0;
     }
 
-    .card h2 {
-      margin: 0 0 10px 0;
-      font-size: 15px;
-    }
+    .card h2 { margin: 0 0 10px 0; font-size: 15px; }
+    .sectionTitle { margin: 12px 0 8px 0; font-size: 13px; color: var(--muted); }
 
-    .sectionTitle {
-      margin: 12px 0 8px 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* ---------- INPUTS ---------- */
-    label {
-      display: block;
-      font-size: 12px;
-      margin: 10px 0 6px;
-      color: var(--muted);
-    }
+    label { display: block; font-size: 12px; margin: 10px 0 6px; color: var(--muted); }
 
     input, select {
       width: 100%;
@@ -124,20 +88,11 @@
       outline: none;
       min-width: 0;
     }
+    input:focus, select:focus { border-color: var(--focus); }
 
-    input:focus, select:focus {
-      border-color: var(--focus);
-    }
+    .divider { height: 1px; background: var(--border); margin: 14px 0; }
 
-    /* ---------- BUTTONS ---------- */
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-      min-width: 0;
-    }
-
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; min-width: 0; }
     .chipBtn {
       border: 1px solid var(--border);
       background: var(--chip);
@@ -148,83 +103,72 @@
       cursor: pointer;
       user-select: none;
     }
+    .chipBtn:hover { border-color: var(--focus); }
 
-    .chipBtn:hover {
-      border-color: var(--focus);
-    }
-
-    /* ---------- RESULTS ---------- */
     .resultsGrid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 12px;
     }
-
-    @media (max-width: 620px) {
-      .resultsGrid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 620px) { .resultsGrid { grid-template-columns: 1fr; } }
 
     .hero {
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 16px;
-      background: linear-gradient(180deg, rgba(65,211,126,0.14), rgba(255,255,255,0.02));
+      background: linear-gradient(180deg, var(--green), rgba(255,255,255,0.02));
+      min-width: 0;
     }
-
     .hero.blue {
-      background: linear-gradient(180deg, rgba(79,124,255,0.18), rgba(255,255,255,0.02));
+      background: linear-gradient(180deg, var(--blue), rgba(255,255,255,0.02));
     }
-
-    .hero .k {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .hero .v {
-      font-size: 26px;
-      font-weight: 750;
-      margin-top: 6px;
-    }
-
-    .hero .s {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
+    .hero .k { font-size: 12px; color: var(--muted); }
+    .hero .v { font-size: 26px; font-weight: 750; margin-top: 6px; }
+    .hero .s { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.35; }
 
     .mini {
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
       background: rgba(255,255,255,0.03);
+      min-width: 0;
     }
 
-    .kpi {
+    .kpi { margin-top: 10px; }
+    .kpi .k { font-size: 12px; color: var(--muted); }
+    .kpi .v { font-size: 16px; font-weight: 650; margin-top: 4px; }
+
+    .note { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+    .splitBox {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding: 12px;
       margin-top: 10px;
     }
-
-    .kpi .k {
+    .splitLine {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 8px;
       font-size: 12px;
       color: var(--muted);
     }
-
-    .kpi .v {
-      font-size: 16px;
-      font-weight: 650;
-      margin-top: 4px;
+    .splitValue { color: var(--text); font-weight: 650; }
+    .rangeWrap { margin-top: 10px; }
+    input[type="range"] {
+      height: 34px;
+      padding: 0;
+      background: transparent;
+      border: none;
     }
 
-    .note {
+    .warn {
       margin-top: 10px;
       font-size: 12px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 14px 0;
+      color: #ffb020;
     }
   </style>
 </head>
@@ -233,7 +177,7 @@
   <h1>PLY Mouse True Value Calculator</h1>
   <p class="sub">
     Estimates what PLY’s share price could look like if Mouse sells X units over a chosen time period.
-    This is a scenario tool, not a prediction.
+    This version makes the split explicit: platform takes a cut first, then the remaining amount is split between the developer and PLY as publisher.
   </p>
 
   <div class="grid">
@@ -245,38 +189,60 @@
       <div class="row">
         <div>
           <label>Units sold (total)</label>
-          <input id="unitsSold" type="number" value="500000">
+          <input id="unitsSold" type="number" min="0" step="1" value="500000">
         </div>
         <div>
           <label>Sales period (months)</label>
-          <input id="salesMonths" type="number" value="12">
+          <input id="salesMonths" type="number" min="1" step="1" value="12">
         </div>
       </div>
 
       <div class="row">
         <div>
           <label>Game price (USD)</label>
-          <input id="priceUsd" type="number" value="40">
+          <input id="priceUsd" type="number" min="0" step="0.01" value="40">
         </div>
         <div>
           <label>FX USD → AUD</label>
-          <input id="fx" type="number" step="0.01" value="1.55">
+          <input id="fx" type="number" min="0" step="0.0001" value="1.55">
         </div>
       </div>
 
-      <div class="sectionTitle">Splits</div>
-      <div class="row3">
+      <div class="sectionTitle">Platform fee</div>
+      <div class="row">
         <div>
-          <label>Platform fee (%)</label>
-          <input id="platformFee" type="number" value="30">
+          <label>Platform fee (percent)</label>
+          <input id="platformFeePct" type="number" min="0" max="100" step="0.01" value="30">
         </div>
         <div>
-          <label>Developer share (%)</label>
-          <input id="publisherShare" type="number" value="0">
+          <label>Preset</label>
+          <select id="platformPreset">
+            <option value="30" selected>Steam / Console 30%</option>
+            <option value="12">Epic 12%</option>
+            <option value="0">Direct 0%</option>
+          </select>
         </div>
-        <div>
-          <label>PLY share (%)</label>
-          <input id="plyShare" type="number" value="100">
+      </div>
+
+      <div class="sectionTitle">Split of the remainder</div>
+      <div class="splitBox">
+        <div class="note" style="margin-top:0;">
+          After the platform fee, the remaining amount is split between:
+          Developer and PLY as publisher.
+        </div>
+
+        <div class="rangeWrap">
+          <label style="margin: 10px 0 6px;">PLY share of the remainder (slider)</label>
+          <input id="plyRemainderSlider" type="range" min="0" max="100" step="1" value="60">
+        </div>
+
+        <div class="splitLine">
+          <div>PLY as publisher gets</div>
+          <div class="splitValue"><span id="plyRemainderPctLabel">60</span>% of remainder</div>
+        </div>
+        <div class="splitLine">
+          <div>Developer gets</div>
+          <div class="splitValue"><span id="devRemainderPctLabel">40</span>% of remainder</div>
         </div>
       </div>
 
@@ -284,42 +250,58 @@
       <div class="row">
         <div>
           <label>Shares on issue</label>
-          <input id="shares" type="number" value="451480388">
+          <input id="shares" type="number" min="1" step="1" value="450000000">
         </div>
         <div>
           <label>Current SP (AUD)</label>
-          <input id="currentSp" type="number" step="0.01" value="0.30">
+          <input id="currentSp" type="number" min="0" step="0.0001" value="0.30">
         </div>
       </div>
+
+      <div class="chips">
+        <div class="chipBtn" id="resetAll">Reset</div>
+        <div class="chipBtn" id="scenarioBear">Bear (margin/multiples)</div>
+        <div class="chipBtn" id="scenarioBase">Base (margin/multiples)</div>
+        <div class="chipBtn" id="scenarioBull">Bull (margin/multiples)</div>
+      </div>
+
+      <div class="warn" id="warning"></div>
     </div>
 
     <!-- VALUATION -->
     <div class="card">
       <h2>Valuation</h2>
 
-      <label>Valuation mode</label>
+      <label>Apply multiples to</label>
       <select id="mode">
-        <option value="annual">Annualised run rate (12 month)</option>
+        <option value="annual" selected>Annualised run rate (12 month)</option>
         <option value="total">Total period</option>
       </select>
 
+      <div class="note">
+        Annualised run rate is usually the cleaner way to think about market pricing.
+        Total period is more conservative if you think sales are a one-off spike.
+      </div>
+
       <div class="divider"></div>
 
-      <div class="sectionTitle">Profit method</div>
+      <div class="sectionTitle">Profit method (P/E)</div>
       <div class="row">
         <div>
-          <label>Net margin (%)</label>
-          <input id="margin" type="number" value="25">
+          <label>Net profit margin on PLY publisher revenue (percent)</label>
+          <input id="marginPct" type="number" min="0" max="100" step="0.01" value="25">
         </div>
         <div>
           <label>P/E multiple</label>
-          <input id="pe" type="number" value="15">
+          <input id="peMultiple" type="number" min="0" step="0.1" value="15">
         </div>
       </div>
 
+      <div class="divider"></div>
+
       <div class="sectionTitle">Revenue method</div>
-      <label>Revenue multiple</label>
-      <input id="revMultiple" type="number" value="3">
+      <label>Revenue multiple (Market cap / revenue)</label>
+      <input id="revMultiple" type="number" min="0" step="0.1" value="3">
     </div>
   </div>
 
@@ -332,53 +314,250 @@
     <div class="resultsGrid">
       <div class="hero">
         <div class="k">Implied share price (Profit method)</div>
-        <div class="v" id="spProfit">A$0.00</div>
+        <div class="v" id="spProfit">A$0.0000</div>
         <div class="s" id="upProfit"></div>
       </div>
 
       <div class="hero blue">
         <div class="k">Implied share price (Revenue method)</div>
-        <div class="v" id="spRevenue">A$0.00</div>
+        <div class="v" id="spRevenue">A$0.0000</div>
         <div class="s" id="upRevenue"></div>
       </div>
+    </div>
+
+    <div style="height: 12px;"></div>
+
+    <div class="row">
+      <div class="mini">
+        <div class="kpi">
+          <div class="k">Gross revenue (USD, total)</div>
+          <div class="v" id="grossUsd">$0</div>
+        </div>
+        <div class="kpi">
+          <div class="k">Platform cut (USD, total)</div>
+          <div class="v" id="platformCutUsd">$0</div>
+        </div>
+        <div class="kpi">
+          <div class="k">Remainder after platform (USD, total)</div>
+          <div class="v" id="remainderUsd">$0</div>
+        </div>
+        <div class="note">
+          This shows the money stack before the developer vs publisher split.
+        </div>
+      </div>
+
+      <div class="mini">
+        <div class="kpi">
+          <div class="k">Developer share (USD, total)</div>
+          <div class="v" id="devShareUsd">$0</div>
+        </div>
+        <div class="kpi">
+          <div class="k">PLY as publisher share (USD, total)</div>
+          <div class="v" id="plyShareUsd">$0</div>
+        </div>
+        <div class="kpi">
+          <div class="k">PLY as publisher share (AUD, total)</div>
+          <div class="v" id="plyShareAudTotal">A$0</div>
+        </div>
+        <div class="kpi">
+          <div class="k">PLY publisher share (AUD per month)</div>
+          <div class="v" id="plyShareAudMonthly">A$0</div>
+        </div>
+        <div class="kpi">
+          <div class="k">PLY publisher share 12 month run rate (AUD)</div>
+          <div class="v" id="plyShareAudRunRate">A$0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top: 12px;">
+      Valuation is applied only to PLY’s publisher share (not the developer share).
+      This is a simplified scenario tool and ignores timing, marketing spend, and accounting treatment.
     </div>
   </div>
 
   <script>
-    function n(x){ return Number(x)||0 }
-    function pct(x){ return n(x)/100 }
-    function money(x){ return "A$" + x.toFixed(4) }
+    const $ = (id) => document.getElementById(id);
 
-    function calc(){
-      const units = n(unitsSold.value)
-      const months = Math.max(1,n(salesMonths.value))
-      const price = n(priceUsd.value)
-      const fxRate = n(fx.value)
+    function n(v) {
+      const x = Number(v);
+      return Number.isFinite(x) ? x : 0;
+    }
+    function fracFromPct(p) { return n(p) / 100; }
 
-      const grossUsd = units * price
-      const netPlatform = grossUsd * (1 - pct(platformFee.value))
-      const netPublisher = netPlatform * (1 - pct(publisherShare.value))
-      const netPlyUsd = netPublisher * pct(plyShare.value)
-      const netPlyAud = netPlyUsd * fxRate
-
-      const base = mode.value === "annual"
-        ? (netPlyAud / months) * 12
-        : netPlyAud
-
-      const profitValue = (base * pct(margin.value) * n(pe.value)) / n(shares.value)
-      const revenueValue = (base * n(revMultiple.value)) / n(shares.value)
-
-      const sp0 = n(currentSp.value)
-
-      spProfit.textContent = money(sp0 + profitValue)
-      spRevenue.textContent = money(sp0 + revenueValue)
-
-      upProfit.textContent = "Upside vs current: " + (((sp0 + profitValue)/sp0 -1)*100).toFixed(1) + "%"
-      upRevenue.textContent = "Upside vs current: " + (((sp0 + revenueValue)/sp0 -1)*100).toFixed(1) + "%"
+    function fmtMoney(x, prefix) {
+      const v = n(x);
+      const abs = Math.abs(v);
+      const decimals = abs >= 100 ? 0 : abs >= 1 ? 2 : 4;
+      return prefix + v.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
     }
 
-    document.querySelectorAll("input,select").forEach(e => e.addEventListener("input", calc))
-    calc()
+    function fmtPct(xFrac) {
+      const v = n(xFrac) * 100;
+      return v.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
+    }
+
+    function syncSliderLabels() {
+      const plyPct = Math.round(n($("plyRemainderSlider").value));
+      const devPct = 100 - plyPct;
+      $("plyRemainderPctLabel").textContent = String(plyPct);
+      $("devRemainderPctLabel").textContent = String(devPct);
+    }
+
+    function setScenario(kind) {
+      // only changes valuation assumptions
+      if (kind === "bear") {
+        $("marginPct").value = 15;
+        $("peMultiple").value = 12;
+        $("revMultiple").value = 2;
+      } else if (kind === "base") {
+        $("marginPct").value = 25;
+        $("peMultiple").value = 15;
+        $("revMultiple").value = 3;
+      } else if (kind === "bull") {
+        $("marginPct").value = 35;
+        $("peMultiple").value = 22;
+        $("revMultiple").value = 5;
+      }
+      compute();
+    }
+
+    function resetAll() {
+      $("unitsSold").value = 500000;
+      $("salesMonths").value = 12;
+      $("priceUsd").value = 40;
+      $("fx").value = 1.55;
+
+      $("platformFeePct").value = 30;
+      $("platformPreset").value = 30;
+
+      $("plyRemainderSlider").value = 60;
+      syncSliderLabels();
+
+      $("shares").value = 451480388;
+      $("currentSp").value = 0.30;
+
+      $("mode").value = "annual";
+      $("marginPct").value = 25;
+      $("peMultiple").value = 15;
+      $("revMultiple").value = 3;
+
+      compute();
+    }
+
+    function compute() {
+      const units = n($("unitsSold").value);
+      const months = Math.max(1, Math.floor(n($("salesMonths").value)));
+
+      const priceUsd = n($("priceUsd").value);
+      const fx = n($("fx").value);
+
+      const platformFee = fracFromPct($("platformFeePct").value);
+
+      const plyRemainderPct = Math.round(n($("plyRemainderSlider").value));
+      const plyRemainderShare = plyRemainderPct / 100;
+      const devRemainderShare = 1 - plyRemainderShare;
+
+      const shares = n($("shares").value);
+      const currentSp = n($("currentSp").value);
+
+      const mode = $("mode").value;
+
+      const margin = fracFromPct($("marginPct").value);
+      const pe = n($("peMultiple").value);
+      const revMult = n($("revMultiple").value);
+
+      let warn = "";
+      if (shares <= 0) warn = "Shares on issue must be greater than 0.";
+      else if (fx <= 0) warn = "FX rate must be greater than 0.";
+      else if (platformFee < 0 || platformFee > 1) warn = "Platform fee should be between 0 and 100.";
+      else if (months <= 0) warn = "Sales period must be 1 month or more.";
+      $("warning").textContent = warn;
+
+      // Money stack (USD)
+      const grossUsd = units * priceUsd;
+      const platformCutUsd = grossUsd * platformFee;
+      const remainderUsd = grossUsd - platformCutUsd;
+
+      const devShareUsd = remainderUsd * devRemainderShare;
+      const plyShareUsd = remainderUsd * plyRemainderShare;
+
+      // Convert PLY share to AUD
+      const plyShareAudTotal = plyShareUsd * fx;
+      const plyShareAudMonthly = plyShareAudTotal / months;
+      const plyShareAudRunRate = plyShareAudMonthly * 12;
+
+      // Update breakdown UI
+      $("grossUsd").textContent = fmtMoney(grossUsd, "$");
+      $("platformCutUsd").textContent = fmtMoney(platformCutUsd, "$");
+      $("remainderUsd").textContent = fmtMoney(remainderUsd, "$");
+
+      $("devShareUsd").textContent = fmtMoney(devShareUsd, "$");
+      $("plyShareUsd").textContent = fmtMoney(plyShareUsd, "$");
+
+      $("plyShareAudTotal").textContent = fmtMoney(plyShareAudTotal, "A$");
+      $("plyShareAudMonthly").textContent = fmtMoney(plyShareAudMonthly, "A$");
+      $("plyShareAudRunRate").textContent = fmtMoney(plyShareAudRunRate, "A$");
+
+      // Choose base for multiples
+      const baseForMultiple = (mode === "annual") ? plyShareAudRunRate : plyShareAudTotal;
+
+      // Profit method (P/E) applied to PLY publisher share only
+      const profitBase = baseForMultiple * margin;
+      const mcUpliftProfit = profitBase * pe;
+      const spUpliftProfit = shares > 0 ? (mcUpliftProfit / shares) : 0;
+      const impliedSpProfit = currentSp + spUpliftProfit;
+
+      // Revenue method applied to PLY publisher share only
+      const mcUpliftRev = baseForMultiple * revMult;
+      const spUpliftRev = shares > 0 ? (mcUpliftRev / shares) : 0;
+      const impliedSpRevenue = currentSp + spUpliftRev;
+
+      $("spProfit").textContent = fmtMoney(impliedSpProfit, "A$");
+      $("spRevenue").textContent = fmtMoney(impliedSpRevenue, "A$");
+
+      const upProfit = (currentSp > 0) ? (impliedSpProfit / currentSp - 1) : 0;
+      const upRev = (currentSp > 0) ? (impliedSpRevenue / currentSp - 1) : 0;
+
+      $("upProfit").textContent = currentSp > 0
+        ? "Upside vs current: " + fmtPct(upProfit) + " (based on PLY publisher share)"
+        : "Enter current share price to see upside.";
+
+      $("upRevenue").textContent = currentSp > 0
+        ? "Upside vs current: " + fmtPct(upRev) + " (based on PLY publisher share)"
+        : "Enter current share price to see upside.";
+    }
+
+    function wire() {
+      // platform preset dropdown sets the platform fee input
+      $("platformPreset").addEventListener("change", () => {
+        $("platformFeePct").value = $("platformPreset").value;
+        compute();
+      });
+
+      // slider labels
+      $("plyRemainderSlider").addEventListener("input", () => {
+        syncSliderLabels();
+        compute();
+      });
+
+      // other inputs
+      document.querySelectorAll("input, select").forEach(el => {
+        if (el.id === "plyRemainderSlider" || el.id === "platformPreset") return;
+        el.addEventListener("input", compute);
+        el.addEventListener("change", compute);
+      });
+
+      $("resetAll").addEventListener("click", resetAll);
+      $("scenarioBear").addEventListener("click", () => setScenario("bear"));
+      $("scenarioBase").addEventListener("click", () => setScenario("base"));
+      $("scenarioBull").addEventListener("click", () => setScenario("bull"));
+
+      syncSliderLabels();
+      compute();
+    }
+
+    wire();
   </script>
 </body>
 </html>
