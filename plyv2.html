@@ -4,95 +4,193 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>PLY Mouse True Value Calculator</title>
+
   <style>
     :root {
       --bg: #0b0c10;
       --card: #111218;
-      --card2: #0f1117;
       --text: #e9e9ee;
       --muted: #a9acb8;
       --border: rgba(255,255,255,0.10);
       --border2: rgba(255,255,255,0.14);
       --good: #41d37e;
-      --warn: #ffb020;
-      --bad: #ff5b5b;
+      --blue: #4f7cff;
       --chip: rgba(255,255,255,0.08);
-      --focus: rgba(255,255,255,0.18);
+      --focus: rgba(255,255,255,0.25);
     }
+
+    /* ---------- GLOBAL FIXES ---------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial;
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(80,120,255,0.22), transparent 60%),
-                  radial-gradient(1200px 600px at 100% 0%, rgba(65,211,126,0.16), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(80,120,255,0.22), transparent 60%),
+        radial-gradient(1200px 600px at 100% 0%, rgba(65,211,126,0.16), transparent 55%),
+        var(--bg);
       color: var(--text);
       margin: 22px;
-      max-width: 1080px;
+      max-width: 1100px;
     }
-    h1 { margin: 0 0 6px 0; font-size: 22px; }
-    .sub { margin: 0 0 18px 0; color: var(--muted); font-size: 13px; line-height: 1.4; }
 
-    .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 14px; }
-    @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
+    h1 {
+      margin: 0 0 6px 0;
+      font-size: 22px;
+    }
 
+    .sub {
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    /* ---------- LAYOUT ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 920px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .row3 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 620px) {
+      .row, .row3 { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- CARDS ---------- */
     .card {
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
       background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      backdrop-filter: blur(6px);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
     }
-    .card h2 { margin: 0 0 10px 0; font-size: 15px; color: #f2f2f7; }
-    .sectionTitle { margin: 12px 0 8px 0; font-size: 13px; color: var(--muted); }
 
-    label { display: block; font-size: 12px; margin: 10px 0 6px; color: var(--muted); }
+    .card h2 {
+      margin: 0 0 10px 0;
+      font-size: 15px;
+    }
+
+    .sectionTitle {
+      margin: 12px 0 8px 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ---------- INPUTS ---------- */
+    label {
+      display: block;
+      font-size: 12px;
+      margin: 10px 0 6px;
+      color: var(--muted);
+    }
+
     input, select {
       width: 100%;
-      padding: 10px 10px;
+      height: 40px;
+      padding: 10px;
       border: 1px solid var(--border2);
       border-radius: 10px;
       background: rgba(0,0,0,0.25);
       color: var(--text);
       font-size: 14px;
       outline: none;
-    }
-    input:focus, select:focus { border-color: var(--focus); }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-    @media (max-width: 620px) {
-      .row, .row3 { grid-template-columns: 1fr; }
+      min-width: 0;
     }
 
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    input:focus, select:focus {
+      border-color: var(--focus);
+    }
+
+    /* ---------- BUTTONS ---------- */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      min-width: 0;
+    }
+
     .chipBtn {
       border: 1px solid var(--border);
       background: var(--chip);
       color: var(--text);
-      padding: 8px 10px;
+      padding: 8px 12px;
       border-radius: 999px;
-      cursor: pointer;
       font-size: 12px;
+      cursor: pointer;
       user-select: none;
     }
-    .chipBtn:hover { border-color: var(--focus); }
-    .chipBtn:active { transform: translateY(1px); }
 
-    .bigResult {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      align-items: stretch;
+    .chipBtn:hover {
+      border-color: var(--focus);
     }
-    @media (max-width: 620px) { .bigResult { grid-template-columns: 1fr; } }
+
+    /* ---------- RESULTS ---------- */
+    .resultsGrid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 620px) {
+      .resultsGrid { grid-template-columns: 1fr; }
+    }
 
     .hero {
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 14px;
+      padding: 16px;
       background: linear-gradient(180deg, rgba(65,211,126,0.14), rgba(255,255,255,0.02));
     }
-    .hero .k { color: var(--muted); font-size: 12px; }
-    .hero .v { font-size: 26px; font-weight: 750; margin-top: 6px; }
-    .hero .s { margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.35; }
+
+    .hero.blue {
+      background: linear-gradient(180deg, rgba(79,124,255,0.18), rgba(255,255,255,0.02));
+    }
+
+    .hero .k {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero .v {
+      font-size: 26px;
+      font-weight: 750;
+      margin-top: 6px;
+    }
+
+    .hero .s {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
 
     .mini {
       border: 1px solid var(--border);
@@ -100,369 +198,187 @@
       padding: 14px;
       background: rgba(255,255,255,0.03);
     }
-    .kpi { margin-top: 10px; }
-    .kpi .k { color: var(--muted); font-size: 12px; }
-    .kpi .v { font-size: 16px; font-weight: 650; margin-top: 5px; }
 
-    .note { color: var(--muted); font-size: 12px; line-height: 1.45; margin-top: 10px; }
-    .warn { color: var(--warn); font-size: 12px; margin-top: 10px; }
-    .fine { color: var(--muted); font-size: 12px; margin-top: 10px; }
-    .divider { height: 1px; background: var(--border); margin: 14px 0; }
+    .kpi {
+      margin-top: 10px;
+    }
+
+    .kpi .k {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .kpi .v {
+      font-size: 16px;
+      font-weight: 650;
+      margin-top: 4px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 14px 0;
+    }
   </style>
 </head>
+
 <body>
   <h1>PLY Mouse True Value Calculator</h1>
   <p class="sub">
-    This estimates what PLY’s share price could look like if Mouse sells X units over a chosen time period.
-    It converts units into net revenue to PLY, then applies either a profit multiple (P/E) or a revenue multiple.
+    Estimates what PLY’s share price could look like if Mouse sells X units over a chosen time period.
     This is a scenario tool, not a prediction.
   </p>
 
   <div class="grid">
+    <!-- INPUTS -->
     <div class="card">
       <h2>Inputs</h2>
 
       <div class="sectionTitle">Sales</div>
       <div class="row">
         <div>
-          <label>Units sold (total for the period)</label>
-          <input id="unitsSold" type="number" min="0" step="1" value="500000" />
+          <label>Units sold (total)</label>
+          <input id="unitsSold" type="number" value="500000">
         </div>
         <div>
           <label>Sales period (months)</label>
-          <input id="salesMonths" type="number" min="1" step="1" value="12" />
+          <input id="salesMonths" type="number" value="12">
         </div>
       </div>
 
       <div class="row">
         <div>
           <label>Game price (USD)</label>
-          <input id="gamePriceUsd" type="number" min="0" step="0.01" value="40" />
+          <input id="priceUsd" type="number" value="40">
         </div>
         <div>
           <label>FX USD → AUD</label>
-          <input id="fx" type="number" min="0" step="0.0001" value="1.55" />
+          <input id="fx" type="number" step="0.01" value="1.55">
         </div>
       </div>
 
       <div class="sectionTitle">Splits</div>
       <div class="row3">
         <div>
-          <label>Platform fee (percent)</label>
-          <input id="platformFeePct" type="number" min="0" max="100" step="0.01" value="30" />
+          <label>Platform fee (%)</label>
+          <input id="platformFee" type="number" value="30">
         </div>
         <div>
-          <label>Publisher share of net (percent)</label>
-          <input id="publisherSharePct" type="number" min="0" max="100" step="0.01" value="0" />
+          <label>Publisher share (%)</label>
+          <input id="publisherShare" type="number" value="0">
         </div>
         <div>
-          <label>PLY share of remaining net (percent)</label>
-          <input id="plySharePct" type="number" min="0" max="100" step="0.01" value="100" />
+          <label>PLY share (%)</label>
+          <input id="plyShare" type="number" value="100">
         </div>
-      </div>
-      <div class="note">
-        How it works: Gross revenue → minus platform fee → minus publisher share → then PLY share of the remainder.
-        If there is no publisher, leave publisher at 0 and PLY at 100.
       </div>
 
-      <div class="sectionTitle">Market inputs</div>
+      <div class="sectionTitle">Market</div>
       <div class="row">
         <div>
           <label>Shares on issue</label>
-          <input id="sharesOnIssue" type="number" min="1" step="1" value="450000000" />
+          <input id="shares" type="number" value="450000000">
         </div>
         <div>
-          <label>Current share price (AUD)</label>
-          <input id="currentSp" type="number" min="0" step="0.0001" value="0.30" />
+          <label>Current SP (AUD)</label>
+          <input id="currentSp" type="number" step="0.01" value="0.30">
         </div>
       </div>
-
-      <div class="divider"></div>
-
-      <div class="sectionTitle">Presets</div>
-      <div class="chips">
-        <div class="chipBtn" id="presetSteam">Preset: Steam 30%</div>
-        <div class="chipBtn" id="presetEpic">Preset: Epic 12%</div>
-        <div class="chipBtn" id="presetConsole">Preset: Console 30%</div>
-        <div class="chipBtn" id="presetPublisherTypical">Preset: Publisher 40% of net</div>
-        <div class="chipBtn" id="resetAll">Reset</div>
-      </div>
-
-      <div class="warn" id="warning"></div>
     </div>
 
+    <!-- VALUATION -->
     <div class="card">
       <h2>Valuation</h2>
 
-      <div class="sectionTitle">Valuation mode</div>
-      <label>Apply multiples to</label>
-      <select id="valuationMode">
-        <option value="annualised" selected>Annualised run rate (12 month)</option>
-        <option value="period">Total over the sales period</option>
+      <label>Valuation mode</label>
+      <select id="mode">
+        <option value="annual">Annualised run rate (12 month)</option>
+        <option value="total">Total period</option>
       </select>
-      <div class="note">
-        Annualised run rate is usually the better mental model.
-        Period mode can be useful if you think sales are a one off spike and the market won’t value it like recurring earnings.
-      </div>
 
       <div class="divider"></div>
 
-      <div class="sectionTitle">Profit method (P/E)</div>
+      <div class="sectionTitle">Profit method</div>
       <div class="row">
         <div>
-          <label>Net profit margin on PLY revenue (percent)</label>
-          <input id="profitMarginPct" type="number" min="0" max="100" step="0.01" value="25" />
+          <label>Net margin (%)</label>
+          <input id="margin" type="number" value="25">
         </div>
         <div>
           <label>P/E multiple</label>
-          <input id="peMultiple" type="number" min="0" step="0.1" value="15" />
+          <input id="pe" type="number" value="15">
         </div>
       </div>
 
-      <div class="sectionTitle">Revenue method (Revenue multiple)</div>
-      <label>Revenue multiple (Market cap / revenue)</label>
-      <input id="revMultiple" type="number" min="0" step="0.1" value="3" />
-
-      <div class="divider"></div>
-
-      <div class="sectionTitle">Quick scenarios</div>
-      <div class="chips">
-        <div class="chipBtn" id="scenarioBear">Bear</div>
-        <div class="chipBtn" id="scenarioBase">Base</div>
-        <div class="chipBtn" id="scenarioBull">Bull</div>
-      </div>
-      <div class="fine">
-        Bear/Base/Bull adjusts profit margin and multiples only. It does not touch sales.
-      </div>
+      <div class="sectionTitle">Revenue method</div>
+      <label>Revenue multiple</label>
+      <input id="revMultiple" type="number" value="3">
     </div>
   </div>
 
-  <div style="height: 14px;"></div>
+  <div style="height:14px"></div>
 
+  <!-- RESULTS -->
   <div class="card">
     <h2>Results</h2>
 
-    <div class="bigResult">
+    <div class="resultsGrid">
       <div class="hero">
         <div class="k">Implied share price (Profit method)</div>
-        <div class="v" id="impliedSpProfit">A$0.0000</div>
-        <div class="s" id="profitSummary">Upside vs current: 0%</div>
+        <div class="v" id="spProfit">A$0.00</div>
+        <div class="s" id="upProfit"></div>
       </div>
-      <div class="hero" style="background: linear-gradient(180deg, rgba(80,120,255,0.16), rgba(255,255,255,0.02));">
+
+      <div class="hero blue">
         <div class="k">Implied share price (Revenue method)</div>
-        <div class="v" id="impliedSpRevenue">A$0.0000</div>
-        <div class="s" id="revenueSummary">Upside vs current: 0%</div>
+        <div class="v" id="spRevenue">A$0.00</div>
+        <div class="s" id="upRevenue"></div>
       </div>
-    </div>
-
-    <div style="height: 12px;"></div>
-
-    <div class="row">
-      <div class="mini">
-        <div class="kpi">
-          <div class="k">Net to PLY (AUD, total for period)</div>
-          <div class="v" id="netToPlyAudTotal">A$0</div>
-        </div>
-        <div class="kpi">
-          <div class="k">Net to PLY (AUD per month)</div>
-          <div class="v" id="netToPlyAudMonthly">A$0</div>
-        </div>
-        <div class="kpi">
-          <div class="k">12 month run rate (AUD)</div>
-          <div class="v" id="netToPlyAudRunRate">A$0</div>
-        </div>
-        <div class="note" id="modeNote"></div>
-      </div>
-
-      <div class="mini">
-        <div class="kpi">
-          <div class="k">Gross revenue (USD, total)</div>
-          <div class="v" id="grossUsd">$0</div>
-        </div>
-        <div class="kpi">
-          <div class="k">Net after platform (USD, total)</div>
-          <div class="v" id="netAfterPlatformUsd">$0</div>
-        </div>
-        <div class="kpi">
-          <div class="k">Net after publisher (USD, total)</div>
-          <div class="v" id="netAfterPublisherUsd">$0</div>
-        </div>
-        <div class="kpi">
-          <div class="k">Net to PLY (USD, total)</div>
-          <div class="v" id="netToPlyUsd">$0</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="note" style="margin-top: 12px;">
-      This assumes the market adds valuation purely from Mouse performance. In reality, price moves also reflect expectations, timing, sentiment,
-      and how repeatable the earnings are across future titles.
     </div>
   </div>
 
   <script>
-    const $ = (id) => document.getElementById(id);
+    function n(x){ return Number(x)||0 }
+    function pct(x){ return n(x)/100 }
+    function money(x){ return "A$" + x.toFixed(4) }
 
-    function n(val) {
-      const x = Number(val);
-      return Number.isFinite(x) ? x : 0;
-    }
-    function fracFromPct(p) { return n(p) / 100; }
+    function calc(){
+      const units = n(unitsSold.value)
+      const months = Math.max(1,n(salesMonths.value))
+      const price = n(priceUsd.value)
+      const fxRate = n(fx.value)
 
-    function fmtMoney(x, currency) {
-      const v = n(x);
-      const abs = Math.abs(v);
-      const decimals = abs >= 100 ? 0 : abs >= 1 ? 2 : 4;
-      return currency + v.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-    }
+      const grossUsd = units * price
+      const netPlatform = grossUsd * (1 - pct(platformFee.value))
+      const netPublisher = netPlatform * (1 - pct(publisherShare.value))
+      const netPlyUsd = netPublisher * pct(plyShare.value)
+      const netPlyAud = netPlyUsd * fxRate
 
-    function fmtPct(xFrac) {
-      const v = n(xFrac) * 100;
-      const sign = v >= 0 ? "" : "";
-      return sign + v.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
-    }
+      const base = mode.value === "annual"
+        ? (netPlyAud / months) * 12
+        : netPlyAud
 
-    function compute() {
-      const unitsSold = n($("unitsSold").value);
-      const salesMonths = Math.max(1, Math.floor(n($("salesMonths").value)));
+      const profitValue = (base * pct(margin.value) * n(pe.value)) / n(shares.value)
+      const revenueValue = (base * n(revMultiple.value)) / n(shares.value)
 
-      const priceUsd = n($("gamePriceUsd").value);
-      const fx = n($("fx").value);
+      const sp0 = n(currentSp.value)
 
-      const platformFee = fracFromPct($("platformFeePct").value);
-      const publisherShare = fracFromPct($("publisherSharePct").value);
-      const plyShare = fracFromPct($("plySharePct").value);
+      spProfit.textContent = money(sp0 + profitValue)
+      spRevenue.textContent = money(sp0 + revenueValue)
 
-      const shares = n($("sharesOnIssue").value);
-      const currentSp = n($("currentSp").value);
-
-      const valuationMode = $("valuationMode").value;
-
-      const profitMargin = fracFromPct($("profitMarginPct").value);
-      const pe = n($("peMultiple").value);
-      const revMult = n($("revMultiple").value);
-
-      let warn = "";
-      if (shares <= 0) warn = "Shares on issue must be greater than 0.";
-      else if (fx <= 0) warn = "FX rate must be greater than 0.";
-      else if (platformFee < 0 || platformFee > 1) warn = "Platform fee should be between 0 and 100.";
-      else if (publisherShare < 0 || publisherShare > 1) warn = "Publisher share should be between 0 and 100.";
-      else if (plyShare < 0 || plyShare > 1) warn = "PLY share should be between 0 and 100.";
-      else if (publisherShare > 0 && plyShare === 0) warn = "PLY share is 0 but publisher share is set. That likely is not intended.";
-      $("warning").textContent = warn;
-
-      // Revenue stack
-      const grossUsd = unitsSold * priceUsd;
-      const netAfterPlatformUsd = grossUsd * (1 - platformFee);
-      const netAfterPublisherUsd = netAfterPlatformUsd * (1 - publisherShare);
-      const netToPlyUsd = netAfterPublisherUsd * plyShare;
-
-      const netToPlyAudTotal = netToPlyUsd * fx;
-      const netToPlyAudMonthly = salesMonths > 0 ? (netToPlyAudTotal / salesMonths) : 0;
-      const netToPlyAudRunRate = netToPlyAudMonthly * 12;
-
-      $("grossUsd").textContent = fmtMoney(grossUsd, "$");
-      $("netAfterPlatformUsd").textContent = fmtMoney(netAfterPlatformUsd, "$");
-      $("netAfterPublisherUsd").textContent = fmtMoney(netAfterPublisherUsd, "$");
-      $("netToPlyUsd").textContent = fmtMoney(netToPlyUsd, "$");
-
-      $("netToPlyAudTotal").textContent = fmtMoney(netToPlyAudTotal, "A$");
-      $("netToPlyAudMonthly").textContent = fmtMoney(netToPlyAudMonthly, "A$");
-      $("netToPlyAudRunRate").textContent = fmtMoney(netToPlyAudRunRate, "A$");
-
-      const baseForMultiple = (valuationMode === "annualised") ? netToPlyAudRunRate : netToPlyAudTotal;
-
-      $("modeNote").textContent =
-        valuationMode === "annualised"
-          ? "Valuation is applying multiples to the 12 month run rate (based on your sales period)."
-          : "Valuation is applying multiples to the total revenue across the chosen sales period.";
-
-      // Profit method
-      const profitBase = baseForMultiple * profitMargin;
-      const mcUpliftProfit = profitBase * pe;
-      const spUpliftProfit = shares > 0 ? (mcUpliftProfit / shares) : 0;
-      const impliedSpProfit = currentSp + spUpliftProfit;
-
-      // Revenue method
-      const mcUpliftRev = baseForMultiple * revMult;
-      const spUpliftRev = shares > 0 ? (mcUpliftRev / shares) : 0;
-      const impliedSpRevenue = currentSp + spUpliftRev;
-
-      $("impliedSpProfit").textContent = fmtMoney(impliedSpProfit, "A$");
-      $("impliedSpRevenue").textContent = fmtMoney(impliedSpRevenue, "A$");
-
-      const upProfit = (currentSp > 0) ? (impliedSpProfit / currentSp - 1) : 0;
-      const upRev = (currentSp > 0) ? (impliedSpRevenue / currentSp - 1) : 0;
-
-      $("profitSummary").textContent = currentSp > 0
-        ? "Upside vs current: " + fmtPct(upProfit)
-        : "Enter current share price to see upside.";
-
-      $("revenueSummary").textContent = currentSp > 0
-        ? "Upside vs current: " + fmtPct(upRev)
-        : "Enter current share price to see upside.";
+      upProfit.textContent = "Upside vs current: " + (((sp0 + profitValue)/sp0 -1)*100).toFixed(1) + "%"
+      upRevenue.textContent = "Upside vs current: " + (((sp0 + revenueValue)/sp0 -1)*100).toFixed(1) + "%"
     }
 
-    function setScenario(kind) {
-      // Only touches valuation assumptions, not sales.
-      if (kind === "bear") {
-        $("profitMarginPct").value = 15;
-        $("peMultiple").value = 12;
-        $("revMultiple").value = 2;
-      } else if (kind === "base") {
-        $("profitMarginPct").value = 25;
-        $("peMultiple").value = 15;
-        $("revMultiple").value = 3;
-      } else if (kind === "bull") {
-        $("profitMarginPct").value = 35;
-        $("peMultiple").value = 20;
-        $("revMultiple").value = 5;
-      }
-      compute();
-    }
-
-    function resetAll() {
-      $("unitsSold").value = 500000;
-      $("salesMonths").value = 12;
-      $("gamePriceUsd").value = 40;
-      $("fx").value = 1.55;
-      $("platformFeePct").value = 30;
-      $("publisherSharePct").value = 0;
-      $("plySharePct").value = 100;
-      $("sharesOnIssue").value = 450000000;
-      $("currentSp").value = 0.30;
-      $("valuationMode").value = "annualised";
-      $("profitMarginPct").value = 25;
-      $("peMultiple").value = 15;
-      $("revMultiple").value = 3;
-      compute();
-    }
-
-    function wire() {
-      const ids = [
-        "unitsSold","salesMonths","gamePriceUsd","fx",
-        "platformFeePct","publisherSharePct","plySharePct",
-        "sharesOnIssue","currentSp","valuationMode",
-        "profitMarginPct","peMultiple","revMultiple"
-      ];
-      ids.forEach(id => $(id).addEventListener("input", compute));
-      $("valuationMode").addEventListener("change", compute);
-
-      $("presetSteam").addEventListener("click", () => { $("platformFeePct").value = 30; compute(); });
-      $("presetEpic").addEventListener("click", () => { $("platformFeePct").value = 12; compute(); });
-      $("presetConsole").addEventListener("click", () => { $("platformFeePct").value = 30; compute(); });
-      $("presetPublisherTypical").addEventListener("click", () => { $("publisherSharePct").value = 40; compute(); });
-
-      $("scenarioBear").addEventListener("click", () => setScenario("bear"));
-      $("scenarioBase").addEventListener("click", () => setScenario("base"));
-      $("scenarioBull").addEventListener("click", () => setScenario("bull"));
-
-      $("resetAll").addEventListener("click", resetAll);
-
-      compute();
-    }
-
-    wire();
+    document.querySelectorAll("input,select").forEach(e => e.addEventListener("input", calc))
+    calc()
   </script>
 </body>
 </html>
