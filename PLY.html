@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PLY True Value Calculator (Mouse)</title>
+  <style>
+    body { font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial; margin: 24px; max-width: 920px; }
+    h1 { margin: 0 0 14px 0; font-size: 22px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 14px; }
+    label { display: block; font-size: 13px; margin: 10px 0 6px; color: #333; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .hint { font-size: 12px; color: #666; margin-top: 6px; line-height: 1.35; }
+    .results { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .kpi { font-size: 13px; color: #555; margin-top: 6px; }
+    .big { font-size: 18px; font-weight: 650; margin-top: 4px; }
+    .muted { color: #777; font-size: 12px; }
+    button { padding: 10px 12px; border-radius: 8px; border: 1px solid #ccc; background: #f6f6f6; cursor: pointer; }
+    button:hover { background: #efefef; }
+    .topbar { display:flex; gap:10px; align-items:center; justify-content:space-between; margin-bottom: 10px; }
+    .small { font-size: 12px; color: #666; }
+    .warn { color: #7a2d2d; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>PLY True Value Calculator</h1>
+    <div>
+      <button id="resetBtn" type="button">Reset</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2 style="margin:0 0 6px 0; font-size:16px;">Core inputs</h2>
+
+      <label>Units sold (Mouse)</label>
+      <input id="unitsSold" type="number" min="0" step="1" value="500000" />
+
+      <label>Game price (USD)</label>
+      <input id="gamePriceUsd" type="number" min="0" step="0.01" value="40" />
+
+      <div class="row">
+        <div>
+          <label>Platform fee (percent, eg 30)</label>
+          <input id="platformFeePct" type="number" min="0" max="100" step="0.01" value="30" />
+        </div>
+        <div>
+          <label>PLY share of net (percent, eg 60)</label>
+          <input id="plySharePct" type="number" min="0" max="100" step="0.01" value="60" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>FX USD → AUD (eg 1.55)</label>
+          <input id="fx" type="number" min="0" step="0.0001" value="1.55" />
+        </div>
+        <div>
+          <label>Shares on issue</label>
+          <input id="sharesOnIssue" type="number" min="1" step="1" value="450000000" />
+        </div>
+      </div>
+
+      <label>Current share price (AUD)</label>
+      <input id="currentSp" type="number" min="0" step="0.0001" value="0.30" />
+
+      <div class="hint">
+        Platform fee is the store cut (Steam/console). PLY share is what PLY receives after platform cut (and publisher if you’ve already baked that in).
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin:0 0 6px 0; font-size:16px;">Valuation assumptions</h2>
+
+      <h3 style="margin:12px 0 6px; font-size:14px;">Profit method (P/E)</h3>
+      <div class="row">
+        <div>
+          <label>Net profit margin on PLY revenue (percent)</label>
+          <input id="profitMarginPct" type="number" min="0" max="100" step="0.01" value="25" />
+        </div>
+        <div>
+          <label>P/E multiple</label>
+          <input id="peMultiple" type="number" min="0" step="0.1" value="15" />
+        </div>
+      </div>
+
+      <h3 style="margin:14px 0 6px; font-size:14px;">Revenue method (Rev multiple)</h3>
+      <label>Revenue multiple (Market cap / revenue)</label>
+      <input id="revMultiple" type="number" min="0" step="0.1" value="3" />
+
+      <div class="hint">
+        If you’re unsure, run scenarios. Profit margin is the biggest swing factor.
+      </div>
+
+      <div class="hint small warn" id="warning"></div>
+    </div>
+  </div>
+
+  <div class="results">
+    <div class="card">
+      <h2 style="margin:0 0 6px 0; font-size:16px;">Cashflow math</h2>
+      <div class="kpi">Gross revenue (USD)</div>
+      <div class="big" id="grossUsd">$0</div>
+
+      <div class="kpi">Net after platform (USD)</div>
+      <div class="big" id="netAfterPlatformUsd">$0</div>
+
+      <div class="kpi">Net to PLY (USD)</div>
+      <div class="big" id="netToPlyUsd">$0</div>
+
+      <div class="kpi">Net to PLY (AUD)</div>
+      <div class="big" id="netToPlyAud">$0</div>
+
+      <div class="muted" style="margin-top:10px;">
+        Net to PLY = gross × (1 - platform fee) × (PLY share of net)
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin:0 0 6px 0; font-size:16px;">Implied share price</h2>
+
+      <h3 style="margin:12px 0 6px; font-size:14px;">Profit method</h3>
+      <div class="kpi">Implied SP (AUD)</div>
+      <div class="big" id="impliedSpProfit">$0</div>
+      <div class="kpi">Upside vs current</div>
+      <div class="big" id="upsideProfit">0%</div>
+
+      <h3 style="margin:16px 0 6px; font-size:14px;">Revenue method</h3>
+      <div class="kpi">Implied SP (AUD)</div>
+      <div class="big" id="impliedSpRevenue">$0</div>
+      <div class="kpi">Upside vs current</div>
+      <div class="big" id="upsideRevenue">0%</div>
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function n(val) {
+      const x = Number(val);
+      return Number.isFinite(x) ? x : 0;
+    }
+
+    function pctToFrac(p) { return n(p) / 100; }
+
+    function fmtMoney(x, currency="$") {
+      const v = n(x);
+      const abs = Math.abs(v);
+      const decimals = abs >= 100 ? 0 : abs >= 1 ? 2 : 4;
+      return currency + v.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    }
+
+    function fmtPct(x) {
+      const v = n(x) * 100;
+      return v.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
+    }
+
+    function compute() {
+      const unitsSold = n($("unitsSold").value);
+      const gamePriceUsd = n($("gamePriceUsd").value);
+
+      const platformFee = pctToFrac($("platformFeePct").value);
+      const plyShare = pctToFrac($("plySharePct").value);
+
+      const fx = n($("fx").value);
+      const shares = n($("sharesOnIssue").value);
+      const currentSp = n($("currentSp").value);
+
+      const profitMargin = pctToFrac($("profitMarginPct").value);
+      const pe = n($("peMultiple").value);
+      const revMult = n($("revMultiple").value);
+
+      // Basic validation warnings
+      let warn = "";
+      if (shares <= 0) warn = "Shares on issue must be greater than 0.";
+      if (fx <= 0) warn = warn || "FX rate must be greater than 0.";
+      if (platformFee < 0 || platformFee > 1) warn = warn || "Platform fee percent should be between 0 and 100.";
+      if (plyShare < 0 || plyShare > 1) warn = warn || "PLY share percent should be between 0 and 100.";
+      $("warning").textContent = warn;
+
+      const grossUsd = unitsSold * gamePriceUsd;
+      const netAfterPlatformUsd = grossUsd * (1 - platformFee);
+      const netToPlyUsd = netAfterPlatformUsd * plyShare;
+      const netToPlyAud = netToPlyUsd * fx;
+
+      $("grossUsd").textContent = fmtMoney(grossUsd, "$");
+      $("netAfterPlatformUsd").textContent = fmtMoney(netAfterPlatformUsd, "$");
+      $("netToPlyUsd").textContent = fmtMoney(netToPlyUsd, "$");
+      $("netToPlyAud").textContent = fmtMoney(netToPlyAud, "A$");
+
+      // Profit method
+      const incrementalProfitAud = netToPlyAud * profitMargin;
+      const mcUpliftProfit = incrementalProfitAud * pe;
+      const spUpliftProfit = shares > 0 ? (mcUpliftProfit / shares) : 0;
+      const impliedSpProfit = currentSp + spUpliftProfit;
+
+      $("impliedSpProfit").textContent = fmtMoney(impliedSpProfit, "A$");
+      $("upsideProfit").textContent = currentSp > 0 ? fmtPct((impliedSpProfit / currentSp) - 1) : "n/a";
+
+      // Revenue method
+      const mcUpliftRev = netToPlyAud * revMult;
+      const spUpliftRev = shares > 0 ? (mcUpliftRev / shares) : 0;
+      const impliedSpRevenue = currentSp + spUpliftRev;
+
+      $("impliedSpRevenue").textContent = fmtMoney(impliedSpRevenue, "A$");
+      $("upsideRevenue").textContent = currentSp > 0 ? fmtPct((impliedSpRevenue / currentSp) - 1) : "n/a";
+    }
+
+    function wire() {
+      const inputs = [
+        "unitsSold","gamePriceUsd","platformFeePct","plySharePct","fx",
+        "sharesOnIssue","currentSp","profitMarginPct","peMultiple","revMultiple"
+      ];
+      inputs.forEach(id => $(id).addEventListener("input", compute));
+      $("resetBtn").addEventListener("click", () => {
+        $("unitsSold").value = 500000;
+        $("gamePriceUsd").value = 40;
+        $("platformFeePct").value = 30;
+        $("plySharePct").value = 60;
+        $("fx").value = 1.55;
+        $("sharesOnIssue").value = 450000000;
+        $("currentSp").value = 0.30;
+        $("profitMarginPct").value = 25;
+        $("peMultiple").value = 15;
+        $("revMultiple").value = 3;
+        compute();
+      });
+      compute();
+    }
+    wire();
+  </script>
+</body>
+</html>
